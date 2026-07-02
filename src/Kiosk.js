@@ -28,7 +28,7 @@ const Kiosk = ({ setCurrentView }) => {
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/employees');
+        const response = await fetch('https://visitor-system-backend-c9iz.onrender.com/api/employees');
         const data = await response.json();
         setAllEmployees(data);
         
@@ -100,7 +100,7 @@ const Kiosk = ({ setCurrentView }) => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/visits', {
+      const response = await fetch('https://visitor-system-backend-c9iz.onrender.com/api/visits', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...formData, photo }),
