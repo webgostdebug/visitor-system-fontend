@@ -38,7 +38,7 @@ const Dashboard = () => {
   const fetchVisits = async (isSilent = false) => {
     try {
       if (!isSilent) setIsLoading(true);
-      const response = await fetch('http://localhost:5000/api/visits');
+      const response = await fetch('https://visitor-system-backend-c9iz.onrender.com/api/visits');
       const data = await response.json();
       
       if (Array.isArray(data)) {
