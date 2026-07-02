@@ -13,7 +13,7 @@ const Login = ({ onLogin }) => {
     
     try {
       // 🚀 Ask the database if the PIN is correct
-      const response = await fetch('https://visitor-system-backend-c9iz.onrender.com/login', {
+      const response = await fetch('https://visitor-system-backend-c9iz.onrender.com/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ mode: selectedMode, pin: pin })
