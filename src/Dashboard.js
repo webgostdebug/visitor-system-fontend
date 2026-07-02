@@ -99,7 +99,7 @@ const Dashboard = () => {
 
   const fetchEmployees = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/employees');
+      const response = await fetch('https://visitor-system-backend-c9iz.onrender.com/api/employees');
       const data = await response.json();
       
       if (Array.isArray(data)) {
@@ -115,7 +115,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchAdminProfile = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/admin');
+        const res = await fetch('https://visitor-system-backend-c9iz.onrender.com/api/admin');
         const data = await res.json();
         if (data) setAdminProfile({ name: data.name, email: data.email, pin: data.pin });
       } catch (err) { console.error(err); }
@@ -135,7 +135,7 @@ const Dashboard = () => {
 
   const handleVisitorAction = async (id, action, visitor, reason = '') => {
     try {
-      const response = await fetch(`http://localhost:5000/api/visits/status/${id}`, {
+      const response = await fetch(`https://visitor-system-backend-c9iz.onrender.com/api/visits/status/${id}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action, visitorEmail: visitor.email, visitorName: visitor.visitorName, reason })
@@ -165,7 +165,7 @@ const Dashboard = () => {
 
     if (result.isConfirmed) {
       try {
-        const response = await fetch(`http://localhost:5000/api/visits/${id}/checkout`, { method: 'PUT' });
+        const response = await fetch(`https://visitor-system-backend-c9iz.onrender.com/api/visits/${id}/checkout`, { method: 'PUT' });
         if (response.ok) {
           Swal.fire({ title: 'Checked Out!', text: `${name} has been successfully logged out.`, icon: 'success', confirmButtonColor: '#8b5cf6', timer: 2000, showConfirmButton: false });
           await fetchVisits(true);
@@ -186,7 +186,7 @@ const Dashboard = () => {
       return;
     }
     try {
-      const response = await fetch('http://localhost:5000/api/employees', {
+      const response = await fetch('https://visitor-system-backend-c9iz.onrender.com/api/employees', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(empForm)
@@ -217,7 +217,7 @@ const Dashboard = () => {
 
     if (result.isConfirmed) {
       try {
-        const response = await fetch(`http://localhost:5000/api/employees/${id}`, { method: 'DELETE' });
+        const response = await fetch(`https://visitor-system-backend-c9iz.onrender.com/api/employees/${id}`, { method: 'DELETE' });
         if (response.ok) {
           Swal.fire({ title: 'Deleted!', text: `${name} has been removed from the roster.`, icon: 'success', confirmButtonColor: '#8b5cf6', timer: 2000, showConfirmButton: false });
           fetchEmployees();
@@ -1084,7 +1084,7 @@ const Dashboard = () => {
               <form onSubmit={async (e) => {
                 e.preventDefault();
                 try {
-                  const res = await fetch('http://localhost:5000/api/admin/update', {
+                  const res = await fetch('https://visitor-system-backend-c9iz.onrender.com/api/admin/update', {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(adminProfile)
