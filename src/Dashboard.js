@@ -248,25 +248,33 @@ const Dashboard = () => {
   });
 
   const filteredHistoryVisits = recentVisits.filter(v => {
-    let matchesDate = true;
-    if (filterDate && v.checkIn) {
-      const visitDateStr = new Date(v.checkIn).toISOString().split('T')[0];
-      matchesDate = visitDateStr === filterDate;
-    }
+  // 1. Keep your existing filters (Date, Month, Status)
+  let matchesDate = true;
+  if (filterDate && v.checkIn) {
+    const visitDateStr = new Date(v.checkIn).toISOString().split('T')[0];
+    matchesDate = visitDateStr === filterDate;
+  }
 
-    let matchesMonth = true;
-    if (filterMonth && v.checkIn) {
-      const visitMonthStr = String(new Date(v.checkIn).getMonth() + 1).padStart(2, '0');
-      matchesMonth = visitMonthStr === filterMonth;
-    }
+  let matchesMonth = true;
+  if (filterMonth && v.checkIn) {
+    const visitMonthStr = String(new Date(v.checkIn).getMonth() + 1).padStart(2, '0');
+    matchesMonth = visitMonthStr === filterMonth;
+  }
 
-    let matchesStatus = true;
-    if (filterStatus) {
-      matchesStatus = (v.status || '').toUpperCase() === filterStatus.toUpperCase();
-    }
+  let matchesStatus = true;
+  if (filterStatus) {
+    matchesStatus = (v.status || '').toUpperCase() === filterStatus.toUpperCase();
+  }
 
-    return matchesDate && matchesMonth && matchesStatus;
-  });
+  // 2. ADD THIS: Search query filter
+  let matchesSearch = true;
+  if (query) {
+    matchesSearch = v.visitorName.toLowerCase().includes(query) || 
+                    v.hostName.toLowerCase().includes(query);
+  }
+
+  return matchesDate && matchesMonth && matchesStatus && matchesSearch;
+});
 
   const filteredEmployees = employees.filter((emp) => {
     if (!query) return true;
